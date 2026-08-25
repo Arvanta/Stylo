@@ -1,6 +1,5 @@
 # Stylo
 
-![Stylo logo](icon.png)
 
 **Stylo** is a lightweight Firefox extension for writing, managing, and applying custom CSS to websites.
 
