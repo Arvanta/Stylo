@@ -1,0 +1,430 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: 14px var(--font);
+}
+
+button,
+a,
+input,
+label {
+  cursor: pointer;
+}
+
+/* ============================================================
+   CUSTOM PROPERTIES (Themes)
+   ============================================================ */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #0b1020;
+  --bg-secondary: #11182a;
+  --bg-elevated: #151d32;
+  --bg-hover: #1f2844;
+  --bg-active: #251d45;
+  --bg-card: #11182a;
+
+  --border-color: #242d46;
+  --border-light: #3b2c67;
+  --border-hero: #3b2c67;
+
+  --text-primary: #eef2ff;
+  --text-secondary: #8791ae;
+  --text-muted: #76819c;
+  --text-accent: #a78bfa;
+  --text-inverse: #182033;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: #211743;
+  --accent-glow: rgba(124, 58, 237, 0.2);
+
+  --hero-gradient: linear-gradient(135deg, #211743, #151a32);
+
+  --radius: 8px;
+  --radius-lg: 15px;
+  --radius-xl: 11px;
+
+  --font: Inter, system-ui, -apple-system, sans-serif;
+  --transition: 0.2s ease;
+}
+
+/* Light theme */
+.light {
+  --bg-primary: #f5f7fb;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #f8faff;
+  --bg-hover: #f0ecff;
+  --bg-active: #eeeaff;
+  --bg-card: #ffffff;
+
+  --border-color: #dce2ee;
+  --border-light: #d7def0;
+  --border-hero: #d7def0;
+
+  --text-primary: #182033;
+  --text-secondary: #62708b;
+  --text-muted: #667085;
+  --text-accent: #6941c6;
+  --text-inverse: #eef2ff;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: #fff;
+
+  --hero-gradient: linear-gradient(135deg, #ffffff, #eef2ff);
+}
+
+/* ============================================================
+   POPUP CONTAINER
+   ============================================================ */
+.popup {
+  width: 320px;
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.35;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.popup header {
+  margin-bottom: 14px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand .logo {
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  color: #fff;
+}
+
+.brand b {
+  display: block;
+  font-size: 15px;
+}
+
+.popup .brand b {
+  font-size: 13px;
+}
+
+.brand small,
+.style-info small,
+.tip small {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.popup .brand small,
+.popup .style-info small {
+  font-size: 10px;
+}
+
+/* ============================================================
+   ICON BUTTON
+   ============================================================ */
+.icon {
+  background: transparent;
+  border: 0;
+  color: var(--text-accent);
+  font-size: 24px;
+  line-height: 1;
+  padding: 2px;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.icon:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: var(--hero-gradient);
+  border: 1px solid var(--border-hero);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hero h1 {
+  font-size: 23px;
+  margin: 8px 0 4px;
+}
+
+.popup .hero h1 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SECTION TITLE
+   ============================================================ */
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 2px 11px;
+}
+
+.popup .section-title {
+  margin: 16px 2px 9px;
+}
+
+.section-title span {
+  font-size: 10px;
+  color: var(--text-accent);
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.popup .section-title span {
+  font-size: 9px;
+}
+
+.section-title a {
+  font-size: 11px;
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.section-title a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   STYLE ROW
+   ============================================================ */
+.style-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 11px;
+  margin-bottom: 8px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.style-row:hover {
+  border-color: var(--border-light);
+}
+
+.swatch {
+  width: 29px;
+  height: 29px;
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.style-info {
+  flex: 1;
+}
+
+.style-info b {
+  font-size: 13px;
+}
+
+.popup .style-info b {
+  font-size: 12px;
+}
+
+/* ============================================================
+   TOGGLE SWITCH (Master & Mini)
+   ============================================================ */
+.switch input,
+.mini input {
+  display: none;
+}
+
+.switch span,
+.mini span {
+  display: block;
+  background: #303952;
+  border-radius: 20px;
+  position: relative;
+  transition: background var(--transition);
+  cursor: pointer;
+}
+
+.switch span {
+  width: 30px;
+  height: 24px;
+}
+
+.mini span {
+  width: 34px;
+  height: 19px;
+}
+
+.switch span::after,
+.mini span::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #a9b3ce;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.switch span::after {
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+}
+
+.mini span::after {
+  width: 13px;
+  height: 13px;
+  left: 3px;
+  top: 3px;
+}
+
+.switch input:checked + span,
+.mini input:checked + span {
+  background: var(--accent);
+}
+
+.switch input:checked + span::after {
+  transform: translateX(6px);
+  background: #fff;
+}
+
+.mini input:checked + span::after {
+  transform: translateX(15px);
+  background: #fff;
+}
+
+/* ============================================================
+   ADD SITE BUTTON
+   ============================================================ */
+.add-site {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px dashed #6550a8;
+  color: var(--text-accent);
+  border-radius: 9px;
+  padding: 13px;
+  font-weight: 700;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.add-site:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   TIP
+   ============================================================ */
+.tip {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-accent);
+}
+
+.tip b {
+  display: block;
+  color: var(--text-primary);
+  font-size: 12px;
+}
+
+.tip small {
+  color: var(--text-muted);
+}
+
+.tip > span {
+  font-size: 18px;
+}
+
+/* ============================================================
+   DARK OVERRIDE (for manual dark class)
+   ============================================================ */
+.dark {
+  --bg-primary: #0b1020;
+  --bg-secondary: #11182a;
+  --bg-elevated: #151d32;
+  --bg-hover: #1f2844;
+  --bg-active: #251d45;
+  --bg-card: #11182a;
+  --border-color: #242d46;
+  --border-light: #3b2c67;
+  --border-hero: #3b2c67;
+  --text-primary: #eef2ff;
+  --text-secondary: #8791ae;
+  --text-muted: #76819c;
+  --text-accent: #a78bfa;
+  --hero-gradient: linear-gradient(135deg, #211743, #151a32);
+}
+
+/* Force dark when .dark is on body */
+.dark .hero,
+.dark .style-row {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark .hero {
+  background: var(--hero-gradient) !important;
+  border-color: var(--border-light) !important;
+}

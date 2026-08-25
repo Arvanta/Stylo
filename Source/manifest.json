@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "Stylo — Custom CSS",
+  "version": "1.0.2",
+  "description": "Targeted custom CSS with live preview, domain matching, variables, and backup tools.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "Stylo",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "manager.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "stylo@arvanta.github.io",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  }
+}

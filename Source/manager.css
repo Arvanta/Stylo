@@ -1,0 +1,805 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+label {
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: 14px var(--font);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   CUSTOM PROPERTIES (Themes)
+   ============================================================ */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #0b1020;
+  --bg-secondary: #11182a;
+  --bg-elevated: #151d32;
+  --bg-input: #0a0f1d;
+  --bg-hover: #1a2238;
+  --bg-active: #251d45;
+  --bg-card: #11182a;
+
+  --border-color: #29334e;
+  --border-light: #27314a;
+  --border-focus: #3b4664;
+  --border-side: #202941;
+
+  --text-primary: #eef2ff;
+  --text-secondary: #8994b1;
+  --text-muted: #71809f;
+  --text-accent: #c4b5fd;
+  --text-inverse: #182033;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: #251d45;
+  --accent-glow: rgba(124, 58, 237, 0.2);
+
+  --danger: #dc385d;
+  --success: #16a394;
+
+  --shadow-dialog: 0 20px 70px rgba(0, 0, 0, 0.6);
+  --shadow-card: none;
+
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+
+  --font: Inter, system-ui, -apple-system, sans-serif;
+  --transition: 0.2s ease;
+}
+
+/* Light theme */
+.light {
+  --bg-primary: #f5f7fb;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #f8faff;
+  --bg-input: #fbfcff;
+  --bg-hover: #f0ecff;
+  --bg-active: #eeeaff;
+  --bg-card: #ffffff;
+
+  --border-color: #dce2ee;
+  --border-light: #cbd5e1;
+  --border-focus: #b8c5d6;
+  --border-side: #dce2ee;
+
+  --text-primary: #182033;
+  --text-secondary: #62708b;
+  --text-muted: #697586;
+  --text-accent: #6941c6;
+  --text-inverse: #eef2ff;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: #eeeaff;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+
+  --shadow-dialog: 0 20px 50px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 5px 18px rgba(37, 56, 88, 0.07);
+}
+
+/* ============================================================
+   LAYOUT: SIDEBAR & MAIN
+   ============================================================ */
+aside {
+  width: 235px;
+  border-right: 1px solid var(--border-side);
+  padding: 25px 18px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
+}
+
+main {
+  max-width: 1100px;
+  flex: 1;
+  padding: 46px 64px;
+  background: var(--bg-primary);
+}
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+
+
+
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav a {
+  display: block;
+  padding: 12px 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius);
+  margin: 4px 0;
+  transition: background var(--transition), color var(--transition);
+}
+
+nav a:hover {
+  background: var(--bg-hover);
+  color: var(--text-accent);
+}
+
+nav a.active {
+  background: var(--bg-active);
+  color: var(--text-accent);
+}
+
+nav a:first-letter {
+  font-size: 18px;
+}
+
+.domain-title {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 1.4px;
+  font-weight: 800;
+  margin: 28px 13px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   SIDE SEARCH
+   ============================================================ */
+.side-search {
+  margin: 0 8px 8px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  transition: border-color var(--transition);
+}
+
+.side-search:focus-within {
+  border-color: var(--accent);
+}
+
+.side-search input {
+  width: 100%;
+  background: transparent;
+  color: var(--text-primary);
+  border: 0;
+  outline: 0;
+  padding: 8px;
+  font-size: 11px;
+}
+
+.side-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.side-search button {
+  background: none;
+  border: 0;
+  color: var(--text-secondary);
+  font-size: 17px;
+  padding: 0 7px;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.side-search button:hover {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   DOMAIN LIST
+   ============================================================ */
+#domain-list {
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#domain-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+#domain-list::-webkit-scrollbar-thumb {
+  background: #35405e;
+  border-radius: 8px;
+}
+
+.domain-link {
+  display: block;
+  color: var(--text-secondary);
+  padding: 8px 13px;
+  border-radius: 7px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.domain-link:hover,
+.domain-link.active {
+  background: var(--bg-hover);
+  color: var(--text-accent);
+}
+
+/* ============================================================
+   SIDEBAR BOTTOM
+   ============================================================ */
+.aside-bottom {
+  margin-top: auto;
+  display: grid;
+  gap: 9px;
+}
+
+.aside-bottom button:not(.about-link) {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 10px;
+  border-radius: var(--radius);
+  text-align: left;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.aside-bottom button:not(.about-link):hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+}
+
+.aside-bottom small {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* --- Utility Row (Theme + About) --- */
+.utility-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.utility-row .theme-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.utility-row .theme-select select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 4px 22px 4px 8px;
+  height: 32px;
+  font-size: 11px;
+  transition: border-color var(--transition);
+  margin: 0;
+}
+
+.utility-row .theme-select select:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+/* --- About Button --- */
+.about-link {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 50%;
+  transition: background var(--transition), color var(--transition);
+  padding: 0;
+}
+
+.about-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   ABOUT DIALOG
+   ============================================================ */
+#about-dialog {
+  text-align: center;
+  min-width: 300px;
+  max-width: 400px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-dialog);
+}
+
+#about-dialog h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+}
+
+#about-dialog p {
+  margin: 6px 0;
+  color: var(--text-secondary);
+}
+
+#about-dialog a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+#about-dialog a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+#about-dialog div {
+  margin-top: 20px;
+}
+
+#about-dialog .primary {
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 10px 28px;
+  font-weight: 700;
+  transition: background var(--transition), transform var(--transition);
+}
+
+#about-dialog .primary:hover {
+  background: var(--accent-hover);
+  transform: scale(0.97);
+}
+
+/* ============================================================
+   MAIN HEADER & TOOLBAR
+   ============================================================ */
+.eyebrow {
+  color: var(--text-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 20px;
+  color: var(--text-accent);
+  margin: 4px 0 8px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+main p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 38px 0 18px;
+}
+
+.toolbar span {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.search {
+  width: 310px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 10px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  transition: border-color var(--transition);
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+.search input {
+  background: none;
+  border: 0;
+  outline: 0;
+  color: var(--text-primary);
+  margin-left: 7px;
+  flex: 1;
+}
+
+.search input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.primary {
+  background: var(--accent);
+  border: 0;
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 12px 17px;
+  font-weight: 700;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.primary:active {
+  transform: scale(0.97);
+}
+
+.plus {
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  width: 22px;
+  height: 22px;
+  font-size: 17px;
+  line-height: 18px;
+  padding: 0;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.plus:hover {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.save {
+  background: var(--success);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.save:hover {
+  background: #0f8b7d;
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  margin: 10px 0;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  border-color: var(--border-focus);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.card h3 {
+  margin: 0 0 5px;
+}
+
+.pill {
+  font-size: 11px;
+  color: var(--text-accent);
+  background: var(--bg-active);
+  padding: 5px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.actions button {
+  background: none;
+  border: 0;
+  color: var(--text-secondary);
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.actions button:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 13px;
+}
+
+/* ============================================================
+   TOGGLE SWITCH
+   ============================================================ */
+.toggle {
+  margin-left: 14px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle span {
+  display: block;
+  width: 38px;
+  height: 21px;
+  background: #333d57;
+  border-radius: 20px;
+  position: relative;
+  transition: background var(--transition);
+  cursor: pointer;
+}
+
+.toggle span::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  background: #99a4bf;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.toggle input:checked + span {
+  background: var(--accent);
+}
+
+.toggle input:checked + span::after {
+  transform: translateX(17px);
+  background: #fff;
+}
+
+/* ============================================================
+   PANEL & EDITOR
+   ============================================================ */
+.panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 760px;
+  box-shadow: var(--shadow-card);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.editor {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  order: -1;
+}
+
+.editor label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editor label br {
+  display: none;
+}
+
+.editor textarea {
+  width: 100%;
+  min-height: 300px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 13px;
+  font: 12px ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+.editor textarea:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+.editor input,
+.editor select {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px;
+  margin: 4px;
+  transition: border-color var(--transition);
+}
+
+.editor input:focus,
+.editor select:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+/* ============================================================
+   DIALOG (General)
+   ============================================================ */
+dialog:not(#about-dialog) {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-dialog);
+  max-width: 440px;
+  width: 90%;
+}
+
+dialog::backdrop {
+  background: rgba(5, 8, 21, 0.7);
+}
+
+dialog p {
+  color: var(--text-secondary);
+}
+
+dialog input {
+  width: 100%;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  padding: 10px;
+  margin: 10px 0 16px;
+  transition: border-color var(--transition);
+}
+
+dialog input:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+dialog button {
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  margin-left: 7px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+dialog button:hover {
+  background: var(--bg-hover);
+}
+
+dialog .danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+dialog .danger:hover {
+  background: #c52d4f;
+}
+
+/* ============================================================
+   GLOBAL CSS PANEL
+   ============================================================ */
+#global-css {
+  width: 100%;
+  min-height: 300px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 14px;
+  font: 13px ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  margin: 20px 0;
+  transition: border-color var(--transition);
+}
+
+#global-css:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.hidden {
+  display: none !important;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 11px;
+}
+
+.setting {
+  display: block;
+  padding: 15px 0;
+  color: var(--text-primary);
+}
+
+.muted {
+  color: var(--text-muted);
+}/* Keep the domain list scrollable without pushing bottom controls */
+aside nav{display:flex;flex-direction:column;min-height:0;flex:1}#domain-list{flex:1;min-height:0;max-height:none;overflow-y:auto}.aside-bottom{flex-shrink:0}
+/* Domain navigation refinements */
+aside nav{min-height:0}#domain-list{height:calc(100vh - 285px);max-height:calc(100vh - 285px)!important;min-height:80px;overflow-y:auto!important;overflow-x:hidden}.domain-link{padding-left:13px}.domain-link.active{box-shadow:inset 3px 0 0 var(--accent);font-weight:700}
