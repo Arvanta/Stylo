@@ -46,11 +46,3 @@ Stylo has no external service dependency. It does not require a server, CDN, rem
 ## Current editor limitations
 
 The editor currently uses a lightweight textarea. Full syntax highlighting, CSS autocomplete, and real-time CSS linting are planned improvements.
-
-## About
-
-Project repository: [github.com/Arvanta/Stylo](https://github.com/Arvanta/Stylo)
-
-## License
-
-Add the project license that best fits your distribution before publishing the repository.
