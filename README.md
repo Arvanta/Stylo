@@ -3,7 +3,7 @@
 
 **Stylo** is a lightweight Firefox extension for writing, managing, and applying custom CSS to websites.
 
-You can now install Stylo directly from the [Mozilla Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/stylo/).
+You can now install Stylo directly from the [Mozilla Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/stylo/)
 
 ## Features
 
