@@ -1,1 +1,100 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Stylo Manager</title><link rel="stylesheet" href="manager.css"></head><body><aside><nav><a id="nav-global">◌ <span>Global CSS</span></a><a id="nav-styles" class="active">▣ <span>Styles</span></a><div class="domain-title">DOMAINS <button id="new" class="plus" title="New style">＋</button></div><div class="side-search"><input id="search" placeholder="Search domains..."><button id="clear-search" title="Clear search">×</button></div><div id="domain-list"></div></nav><div class="aside-bottom"><button id="import">↓ Import</button><button id="export">↑ Export</button><div class="utility-row"><label class="theme-select">Theme <select id="theme"><option value="auto">Auto</option><option value="dark">Dark</option><option value="light">Light</option></select></label><button id="about-button" class="about-link" title="About Stylo" aria-label="About Stylo">ⓘ</button></div><dialog id="about-dialog"><h2>Stylo</h2><p>Version 1.0.2</p><p>Custom CSS for Firefox</p><a href="https://github.com/Arvanta/Stylo" target="_blank">github.com/Arvanta/Stylo</a><div><button id="close-about" class="primary">Close</button></div></dialog></div></aside><main><header><div><h1>Manage your styles</h1></div></header><section id="cards"></section><section id="global-panel" class="panel hidden"><h2>Global CSS</h2><p>These rules are applied to every website.</p><textarea id="global-css" placeholder="body { ... }"></textarea><br><button id="save-global" class="primary">Save global CSS</button></section></main><dialog id="confirm-dialog"><h3>Delete style?</h3><p>This style will be permanently removed.</p><div><button id="cancel-delete">Cancel</button><button id="confirm-delete" class="danger">Delete</button></div></dialog><dialog id="input-dialog"><h3 id="input-title">New style</h3><p id="input-message"></p><input id="domain-input" placeholder="example.com"><div><button id="cancel-input">Cancel</button><button id="confirm-input" class="primary">Continue</button></div></dialog><input type="file" id="file" accept=".json" hidden><script src="manager.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Stylo Manager</title>
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+  <aside>
+    <nav aria-label="Manager navigation">
+      <button id="nav-global" class="nav-link" type="button" aria-current="page">◌ <span>Global CSS</span></button>
+      <div class="domain-title">DOMAINS <button id="new" class="plus" type="button" title="New style" aria-label="New style">+</button></div>
+      <div class="side-search">
+        <input id="search" type="search" placeholder="Search domains..." aria-label="Search domains">
+        <button id="clear-search" type="button" title="Clear search" aria-label="Clear search">×</button>
+      </div>
+      <div id="domain-list" role="list" aria-label="Saved domains"></div>
+    </nav>
+    <div class="aside-bottom">
+      <div class="utility-row">
+        <label class="theme-select" title="Theme">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12v12z"/></svg>
+          <select id="theme" aria-label="Theme">
+            <option value="auto">Auto</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </label>
+        <button id="import" class="ibtn" type="button" title="Import backup" aria-label="Import backup">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </button>
+        <button id="export" class="ibtn" type="button" title="Export backup" aria-label="Export backup">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+        </button>
+        <button id="about-button" class="ibtn" type="button" title="About Stylo" aria-label="About Stylo">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </button>
+      </div>
+      <dialog id="about-dialog">
+        <h2>Stylo</h2>
+        <p>Version 1.0.10</p>
+        <p>Custom CSS for Firefox</p>
+        <a href="https://github.com/Arvanta/Stylo" target="_blank" rel="noopener noreferrer">github.com/Arvanta/Stylo</a>
+        <div><button id="close-about" class="primary" type="button">Close</button></div>
+      </dialog>
+    </div>
+  </aside>
+
+  <main>
+    <header><h1>Manage your styles</h1></header>
+    <section id="cards" class="hidden" aria-label="Website styles"></section>
+    <section id="global-panel" class="panel hidden">
+      <h2>Global CSS</h2>
+      <p>These rules are applied to every website.</p>
+      <textarea id="global-css" aria-label="Global CSS rules" placeholder="body { ... }"></textarea>
+      <button id="save-global" class="primary" type="button">Save global CSS</button>
+      <div id="global-error" class="error" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <dialog id="confirm-dialog">
+    <h3>Delete style?</h3>
+    <p>This style will be permanently removed.</p>
+    <div class="dialog-actions">
+      <button id="cancel-delete" type="button">Cancel</button>
+      <button id="confirm-delete" class="danger" type="button">Delete</button>
+    </div>
+  </dialog>
+  <dialog id="input-dialog">
+    <h3 id="input-title">New style</h3>
+    <p id="input-message"></p>
+    <input id="domain-input" type="text" aria-label="Domain or target" placeholder="example.com">
+    <div class="dialog-actions">
+      <button id="cancel-input" type="button">Cancel</button>
+      <button id="confirm-input" class="primary" type="button">Continue</button>
+    </div>
+  </dialog>
+  <dialog id="unsaved-dialog">
+    <h3>Unsaved changes</h3>
+    <p id="unsaved-message"></p>
+    <div class="dialog-actions">
+      <button id="unsaved-cancel" type="button">Cancel</button>
+      <button id="unsaved-discard" class="danger" type="button">Discard</button>
+      <button id="unsaved-save" class="primary" type="button">Save changes</button>
+    </div>
+  </dialog>
+  <dialog id="import-confirm-dialog">
+    <h3>Import backup?</h3>
+    <p>Styles will be replaced. Settings included in the backup will also be replaced.</p>
+    <div class="dialog-actions">
+      <button id="cancel-import" type="button">Cancel</button>
+      <button id="confirm-import" class="danger" type="button">Import backup</button>
+    </div>
+  </dialog>
+  <input type="file" id="file" accept=".json,application/json" hidden>
+  <script src="store.js"></script>
+  <script src="matching.js"></script>
+  <script src="manager.js"></script>
+</body>
+</html>

@@ -1,1 +1,39 @@
-<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="ui.css"></head><body class="popup"><header><div class="brand"><div><b>Stylo</b><small>Custom CSS</small></div></div><div class="header-actions"><label class="switch" title="Enable or disable Stylo"><input id="master" type="checkbox"><span></span></label><button id="open-panel" class="icon" title="Open manager">⚙</button></div></header><main><div id="styles"></div></main><script src="popup.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="ui.css">
+</head>
+<body class="popup">
+<header>
+<div class="brand">
+<img class="logo" src="icon.png" alt="">
+<b>Stylo</b>
+</div>
+<div class="header-actions">
+<label class="ibtn power" id="power" title="Turn Stylo off">
+<input id="master" type="checkbox" aria-label="Enable Stylo">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg>
+</label>
+<button id="open-panel" class="ibtn" title="Open manager" aria-label="Open manager">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+</button>
+</div>
+</header>
+<main id="content">
+<section class="site-card">
+<div class="site">
+<div class="site-mark" id="site-mark"></div>
+<div class="site-text">
+<b id="site-host"></b>
+<small id="site-status"></small>
+</div>
+</div>
+<div id="styles"></div>
+</section>
+</main>
+<script src="store.js"></script>
+<script src="matching.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

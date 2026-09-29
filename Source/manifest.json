@@ -1,12 +1,13 @@
 {
   "manifest_version": 2,
   "name": "Stylo — Custom CSS",
-  "version": "1.0.2",
+  "version": "1.0.10",
   "description": "Targeted custom CSS with live preview, domain matching, variables, and backup tools.",
   "permissions": [
     "storage",
     "tabs",
     "activeTab",
+    "webNavigation",
     "<all_urls>"
   ],
   "browser_action": {
@@ -19,6 +20,7 @@
   },
   "background": {
     "scripts": [
+      "store.js",
       "background.js"
     ]
   },
@@ -28,6 +30,7 @@
         "<all_urls>"
       ],
       "js": [
+        "matching.js",
         "content.js"
       ],
       "run_at": "document_start"

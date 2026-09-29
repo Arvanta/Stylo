@@ -7,11 +7,24 @@
 
 button,
 a,
-input,
-select,
-textarea,
-label {
+label,
+select {
   cursor: pointer;
+}
+
+input[type="text"],
+input[type="search"],
+textarea {
+  cursor: text;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 body {
@@ -131,29 +144,30 @@ main {
 /* ============================================================
    NAVIGATION
    ============================================================ */
-nav a {
+.nav-link {
   display: block;
+  width: 100%;
   padding: 12px 13px;
   color: var(--text-secondary);
-  text-decoration: none;
+  background: transparent;
+  border: 0;
   border-radius: var(--radius);
   margin: 4px 0;
+  text-align: left;
+  font: inherit;
   transition: background var(--transition), color var(--transition);
 }
 
-nav a:hover {
+.nav-link:hover,
+.nav-link.active {
   background: var(--bg-hover);
   color: var(--text-accent);
 }
 
-nav a.active {
-  background: var(--bg-active);
-  color: var(--text-accent);
-}
-
-nav a:first-letter {
-  font-size: 18px;
-}
+.nav-link.active { background: var(--bg-active); }
+.nav-link:focus-visible,
+.domain-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-link:first-letter { font-size: 18px; }
 
 .domain-title {
   font-size: 10px;
@@ -231,14 +245,18 @@ nav a:first-letter {
 
 .domain-link {
   display: block;
+  width: 100%;
   color: var(--text-secondary);
+  background: transparent;
+  border: 0;
   padding: 8px 13px;
   border-radius: 7px;
+  font: inherit;
   font-size: 12px;
+  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-decoration: none;
   transition: background var(--transition), color var(--transition);
 }
 
@@ -257,81 +275,91 @@ nav a:first-letter {
   gap: 9px;
 }
 
-.aside-bottom button:not(.about-link) {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  padding: 10px;
-  border-radius: var(--radius);
-  text-align: left;
-  transition: background var(--transition), border-color var(--transition);
-}
-
-.aside-bottom button:not(.about-link):hover {
-  background: var(--bg-hover);
-  border-color: var(--accent);
-}
-
 .aside-bottom small {
   color: var(--text-muted);
   text-align: center;
   margin-top: 12px;
 }
 
-/* --- Utility Row (Theme + About) --- */
+/* --- Utility row: theme, import, export, about (one line) --- */
 .utility-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 4px;
   margin-top: 4px;
 }
 
-.utility-row .theme-select {
+.theme-select {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  padding: 0 3px 0 9px;
   color: var(--text-secondary);
-  font-size: 11px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
 }
 
-.utility-row .theme-select select {
-  background: var(--bg-secondary);
+.theme-select:hover,
+.theme-select:focus-within {
+  border-color: var(--accent);
+}
+
+.theme-select select {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  background: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 4px 22px 4px 8px;
-  height: 32px;
+  border: 0;
+  outline: 0;
   font-size: 11px;
-  transition: border-color var(--transition);
+  padding: 0;
   margin: 0;
 }
 
-.utility-row .theme-select select:focus {
-  border-color: var(--accent);
-  outline: 0;
+.theme-select select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
-/* --- About Button --- */
-.about-link {
+.ico {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ibtn {
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
-  font-size: 18px;
-  line-height: 1;
+  padding: 0;
+  color: var(--text-secondary);
   background: transparent;
   border: 0;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: 50%;
+  border-radius: var(--radius);
   transition: background var(--transition), color var(--transition);
-  padding: 0;
 }
 
-.about-link:hover {
+.ibtn:hover {
   background: var(--bg-hover);
-  color: var(--text-primary);
+  color: var(--text-accent);
+}
+
+.ibtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 /* ============================================================
@@ -479,15 +507,16 @@ main p {
 }
 
 .plus {
+  display: grid;
+  place-items: center;
   border: 0;
   background: var(--accent);
   color: #fff;
   border-radius: 6px;
-  width: 22px;
-  height: 22px;
-  font-size: 17px;
-  line-height: 18px;
-  padding: 0;
+  width: 24px;
+  height: 24px;
+  font: 400 22px/1 Arial, sans-serif;
+  padding: 0 0 2px;
   transition: background var(--transition), transform var(--transition);
 }
 
@@ -586,7 +615,16 @@ main p {
 }
 
 .toggle input {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .toggle span {
@@ -616,6 +654,11 @@ main p {
   background: var(--accent);
 }
 
+.toggle input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .toggle input:checked + span::after {
   transform: translateX(17px);
   background: #fff;
@@ -641,26 +684,114 @@ main p {
   margin-top: 15px;
   display: flex;
   flex-direction: column;
+  gap: 14px;
 }
 
-.editor > div:last-child {
+.editor .fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  align-items: end;
+  gap: 10px;
+  order: -2;
+}
+
+.editor .fields label {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.editor .fields label br { display: none; }
+.editor .fields button { justify-self: start; }
+.save-area { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.save-area .error { max-width: 240px; line-height: 1.4; }
+
+.css-editor { order: 0; }
+
+.variables-editor {
+  order: 1;
+  padding: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+}
+
+.variables-heading {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-  order: -1;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
-.editor label {
+.add-variable {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 7px;
+  min-height: 32px;
+  padding: 5px 11px 5px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-active);
+  color: var(--text-accent);
+  font: 600 12px/1 var(--font);
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
 }
 
-.editor label br {
-  display: none;
+.add-variable::before {
+  content: '+';
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font: 400 18px/1 Arial, sans-serif;
 }
+
+.add-variable:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.add-variable:hover::before {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.add-variable:active { transform: translateY(1px); }
+
+.variable-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.8fr) minmax(160px, 1.4fr) auto;
+  align-items: end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.variable-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.variable-row button {
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--danger);
+}
+
+.variables-empty { color: var(--text-muted); font-size: 12px; }
 
 .editor textarea {
   width: 100%;
@@ -675,27 +806,26 @@ main p {
   transition: border-color var(--transition);
 }
 
-.editor textarea:focus {
+.editor textarea:focus,
+.editor input:focus,
+.editor select:focus {
   border-color: var(--accent);
   outline: 0;
 }
 
 .editor input,
 .editor select {
+  width: 100%;
   background: var(--bg-input);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 8px;
-  margin: 4px;
+  margin: 0;
   transition: border-color var(--transition);
 }
 
-.editor input:focus,
-.editor select:focus {
-  border-color: var(--accent);
-  outline: 0;
-}
+.save { justify-self: start; }
 
 /* ============================================================
    DIALOG (General)
@@ -799,7 +929,68 @@ dialog .danger:hover {
 
 .muted {
   color: var(--text-muted);
-}/* Keep the domain list scrollable without pushing bottom controls */
-aside nav{display:flex;flex-direction:column;min-height:0;flex:1}#domain-list{flex:1;min-height:0;max-height:none;overflow-y:auto}.aside-bottom{flex-shrink:0}
-/* Domain navigation refinements */
-aside nav{min-height:0}#domain-list{height:calc(100vh - 285px);max-height:calc(100vh - 285px)!important;min-height:80px;overflow-y:auto!important;overflow-x:hidden}.domain-link{padding-left:13px}.domain-link.active{box-shadow:inset 3px 0 0 var(--accent);font-weight:700}
+}
+
+/* Keep the domain list scrollable without pushing bottom controls. */
+aside nav { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+#domain-list { flex: 1; min-height: 80px; height: auto; max-height: none; overflow-y: auto; overflow-x: hidden; }
+.aside-bottom { flex-shrink: 0; }
+.domain-link.active { box-shadow: inset 3px 0 0 var(--accent); font-weight: 700; }
+
+@media (max-width: 800px) {
+  main { padding: 32px 24px; }
+}
+
+@media (max-width: 600px) {
+  body { display: block; }
+  aside { width: 100%; height: auto; min-height: 0; position: relative; padding: 14px; }
+  aside nav { flex: none; }
+  #domain-list { max-height: 190px; min-height: 0; }
+  .aside-bottom { margin-top: 12px; }
+  main { padding: 24px 14px; }
+  .editor .fields { grid-template-columns: 1fr; }
+  .variable-row { grid-template-columns: 1fr; }
+  .variable-row button { justify-self: start; }
+  .card-top { align-items: flex-start; }
+}
+
+/* ============================================================
+   UNSAVED CHANGES
+   ============================================================ */
+.dirty-badge {
+  display: none;
+  margin-left: 8px;
+  font-size: 11px;
+  color: var(--text-accent);
+}
+
+.card.dirty {
+  border-color: var(--accent);
+}
+
+.card.dirty .save {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.card.dirty .save:hover {
+  background: var(--accent-hover);
+}
+
+.card.dirty .dirty-badge {
+  display: inline-block;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dialog-actions button {
+  margin-left: 0;
+}
+
+/* The big first letter is meant for the nav icons only, not domain names */
+.domain-link:first-letter { font-size: inherit; }
