@@ -1,4 +1,8 @@
-# Stylo
+<h1>
+  <img src="Logo.png" alt="Stylo logo" width="28" style="vertical-align: middle;">
+  Stylo
+</h1>
+
 
 **Stylo** is a lightweight Firefox extension for writing, managing, and applying custom CSS to websites.
 
